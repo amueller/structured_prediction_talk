@@ -15,6 +15,8 @@
 
 \setbeamercolor*{framesubtitle}{fg=white}
 
+\setbeamertemplate{navigation symbols}{}%remove navigation symbols
+
 \setbeamercolor*{block title}{parent=structure,bg=black!60}
 \setbeamercolor*{block body}{fg=black,bg=black!10}
 \setbeamercolor*{block title alerted}{parent=alerted text,bg=black!15}
@@ -86,21 +88,94 @@
     % model correlations
     \begin{frame}
         \frametitle{Multi-Label Classification}
+
+        \begin{table}
+            \begin{tabularx}{\linewidth}{lccccc}
+                \toprule
+                & \footnotesize{Politics} & \footnotesize{Sports} & \footnotesize{Finance} & \footnotesize{Domestic} & \footnotesize{Religion}\\
+                \cmidrule{2-6}
+                News Story1 & 1 & 0 & 0 & 1 & 1\\
+                News Story2 & 0 & 1 & 0 & 1 & 0\\
+                News Story3 & 0 & 0 & 1 & 0 & 0\\
+                \bottomrule
+            \end{tabularx}
+        \end{table}
+
+        \begin{visibleenv}<2>
+        \begin{table}
+            \begin{tabularx}{\linewidth}{lccccc}
+                \toprule
+                & \footnotesize{Owns Car} & \footnotesize{Smokes} & \footnotesize{Married} & \footnotesize{Self-Employed} & \footnotesize{Has Kids}\\
+                \cmidrule{2-6}
+                Customer1 & 1 & 0 & 1 & 0 & 1\\
+                Customer2 & 1 & 1 & 0 & 1 & 0\\
+                Customer3 & 0 & 1 & 1 & 0 & 0\\
+                \bottomrule
+            \end{tabularx}
+        \end{table}
+        \end{visibleenv}
+        
     \end{frame}
 
     \begin{frame}
         \frametitle{Sequence Tagging}
-        % voice recognition
-        % part of speech tagging
-        % action recognition
+        \begin{columns}[t]
+            \column{.2\linewidth}
+            \includegraphics[width=\linewidth]{images/stroke1}\\
+            \begin{visibleenv}<2->
+                \tiny{Stroke cat.}
+            \end{visibleenv}
+
+            \column{.2\linewidth}
+            \includegraphics[width=\linewidth]{images/stroke2}\\
+            \begin{visibleenv}<2->
+            \tiny Stroke cat.
+            \end{visibleenv}
+
+            \column{.2\linewidth}
+            \includegraphics[width=\linewidth]{images/stroke3}\\
+            \begin{visibleenv}<2->
+            \tiny Stroke cat.
+            \end{visibleenv}
+
+            \column{.2\linewidth}
+            \includegraphics[width=\linewidth]{images/open_trash_can}\\
+            \begin{visibleenv}<2->
+                \tiny{Open trash can.}
+            \end{visibleenv}
+
+            \column{.2\linewidth}
+            \includegraphics[width=\linewidth]{images/cat_in_trashcan}\\
+            \begin{visibleenv}<2->
+                \tiny{Put cat in trash can.}
+            \end{visibleenv}
+        \end{columns}
+    \vspace{5mm}
+    \begin{center}
+    \begin{visibleenv}<3->
+            \includegraphics[width=.8\linewidth]{images/speech}\\
+    \end{visibleenv}
+    \begin{visibleenv}<4->
+                Struc-tured pre-dic-tion in Py-thon
+    \end{visibleenv}
+    \end{center}
     \end{frame}
 
     \begin{frame}
         \frametitle{Predicting Parse Trees}
+        \begin{center}
+            \includegraphics[width=.8\linewidth]{images/parse_tree}
+        \end{center}
     \end{frame}
 
     \begin{frame}
         \frametitle{Semantic Images Segmentation}
+        \begin{figure}
+            \includegraphics[width=.45 \textwidth]{images/pascal}
+            \begin{visibleenv}<2->
+                \includegraphics[width=.45 \textwidth]{images/pascal_gt}
+            \end{visibleenv}
+        \end{figure}
     \end{frame}
 
     \begin{frame}
