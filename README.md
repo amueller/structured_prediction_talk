@@ -1,4 +1,4 @@
-strucutred_prediction_talk
-==========================
+Structured Prediction and PyStruct
+==================================
 
 Slides for explaining structured prediction and PyStruct
