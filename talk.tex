@@ -27,20 +27,9 @@
 \DeclareMathOperator*{\argmin}{arg\,min}
 \DeclareMathOperator*{\ForAll}{\bigwedge}
 \DeclareMathOperator*{\Exists}{\bigvee}
-\newcommand{\W}{\mathcal{W}}
+\newcommand{\hoch}[1]{^{#1}}
 
-\newcommand*\kreis[2]{\unitlength0.7ex\begin{picture}(2.5,2.5)%
-
-
-\color{#2}%
-\put(0.75,0.75){\circle*{3}}%
-\color{black}%
-\put(0.75,0.75){\circle{3}}%
-\put(0.7,0.7){\makebox(0,0){#1}}\end{picture}}
-\newcommand\itplus{\kreis{$+$}{green}}
-\newcommand\itminus{\kreis{$-$}{red}}
-\newcommand\prob[2]{\ensuremath{p_{\mathrm{#1}}\left( #2 \right)}}
-\newcommand\bedprob[3]{\ensuremath{p_{\mathrm{#1}}\left( #2 \left|#3\right. \right)}}
+\AtBeginSection{\frame{\usebeamerfont{section title}\insertsection}}
 
 \newcommand\etal{et.\,al.}
 
@@ -74,13 +63,14 @@
 \newcommand\ml{\setlength\itemindent{-11mm}}
 
 	\title{Structured Prediction and PyStruct} 
-    \author[short]{Andreas M\"uller}%
+    \author{Andreas M\"uller}%
 
 	\begin{document}
 
 	\begin{frame}[plain]
 		\titlepage
 	\end{frame}
+
 
     \section{Motivation}
     % output space combinatorial
@@ -194,45 +184,102 @@
     \section{Inference and Factor Graphs}
     \begin{frame}
         \frametitle{Predicting discrete vectors}
+        \[y = (y_1, y_2, \dotsc, y_{n_i})\]
+        \begin{visibleenv}<2>
+            \begin{align*}
+            f(x, w) &= \argmax_{y \in \mathcal{Y}}  w^T \psi(x, y)\\
+                &= \argmax_{y_1, y_2, \dotsc, y_{n_i}} w^T \psi(x, y)
+            \end{align*}
+        \end{visibleenv}
     \end{frame}
 
     \begin{frame}
         \frametitle{Factor Graphs}
-        % general functions
-        % then linear svm
+        \begin{columns}[c]
+            \column{.6\linewidth}
+            \begin{align*}
+            g(x, y) &= g_1(x, y_1, y_2, y_3) + g_2(x, y_3, y_4)\\
+                    &+ g_3(x, y_4) + g_4(x, y_4, y_5, y_6)
+            \end{align*}
+            \column{.3\linewidth}
+                \includegraphics[width=\textwidth]{images/factor_graph}
+        \end{columns}
     \end{frame}
 
     \begin{frame}
-        \frametitle{Inference in Trees}
+        \frametitle{Factor Graph for HMM}
+        \begin{center}
+            \includegraphics[width=.8\textwidth]{images/hmm}
+        \end{center}
     \end{frame}
 
     \begin{frame}
-        \frametitle{Inference in Gerneral Graphs}
+        \frametitle{Inference}
+        \begin{columns}[t]
+            \column{.5\linewidth}
+            Easy\\
+            \vspace{5mm}
+            \includegraphics[width=.8\textwidth]{images/tree}
+            \column{.5\linewidth}
+            Tricky\\
+            \vspace{5mm}
+            \includegraphics[width=.8\textwidth]{images/grid}
+        \end{columns}
     \end{frame}
 
     \section{Learning}
     \begin{frame}
         \frametitle{Probabilistic Learning}
+        \[ p(y|x, w) = \frac{1}{Z} exp(w^T \psi(x, y))\]
+        \[Z = \sum_{y' \in \mathcal{Y}} exp(w^T \psi(x, y')) \]
+        \begin{visibleenv}<2->
+        Objective
+        \begin{align*}
+            \max_w \sum_i \log(p(y\hoch{i} | x\hoch{i}, w))\\
+            = \max_w \sum_i w^T \psi(x\hoch{i}, y\hoch{i}) - \log(Z)
+        \end{align*}
+        \end{visibleenv}
+
     \end{frame}
+
     \begin{frame}
         \frametitle{Max-Margin Learning}
+        \begin{align*}
+            &\min_w \frac{1}{2} ||w||^2 + C \sum_i  \ell(x\hoch{i}, y\hoch{i}, w)\\
+            &\ell(x\hoch{i}, y\hoch{i}, w) = [\max_{y \in \mathcal{Y}} \Delta(y\hoch{i}, y) + w^T \psi(x\hoch{i}, y) - w^T \psi(x\hoch{i}, y\hoch{i})]_+.
+        \end{align*}
     \end{frame}
 
 
     \section{PyStruct}
     \begin{frame}
         \frametitle{Simple structured prediction}
-        % Learner
-        % Model
-        % Inference
+        Estimator = Learner + Model + Inference\\
+
+        \begin{itemize}
+            \item<2-> Learner: SubgradientSSVM, StructuredPerceptron, OneSlackSSVM, LatentSSVM
+            \item<2-> Model: BinaryClf, MultiLabelClf, ChainCRF, GraphCRF, EdgeFeatureGraphCRF
+            \item<2-> Inference: Linear Programming, QPBO (PyQPBO), Dual Decomposition (AD3), Message Passing (OpenGM), Everything (OpenGM)
+        \end{itemize}
+
     \end{frame}
 
     \begin{frame}
         \frametitle{Example OCR}
+        \includegraphics[width=.7\linewidth]{images/code_letters}
+    \end{frame}
+
+    \begin{frame}
+        \frametitle{Example OCR}
+        \includegraphics[width=.49\linewidth]{images/plot_letters_1}
+        \includegraphics[width=.49\linewidth]{images/plot_letters_2}
     \end{frame}
 
     \begin{frame}
         \frametitle{Example Snake}
+        \begin{center}
+            \includegraphics[width=.70\linewidth]{images/plot_snakes_1}
+        \end{center}
     \end{frame}
 
     \begin{frame}
