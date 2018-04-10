@@ -1,5 +1,7 @@
 \documentclass[final,ignorenonframetext,compress]{beamer}
 \usetheme{Warsaw}
+\setbeamertemplate{navigation symbols}{}%remove navigation symbols
+
 
 \usepackage{natbib}
 \usepackage{booktabs}
@@ -59,7 +61,7 @@
 
 \institute[] % (optional, but mostly needed)
 {%
-    University of Bonn
+    Columbia University
 }
 
 \begin{document}
@@ -101,6 +103,185 @@
     \end{figure}
 \end{frame}
 
+\section{Motivation}
+% output space combinatorial
+% output space depends on input space
+% model correlations
+\begin{frame}
+    \frametitle{Multi-Label Classification}
+
+    \begin{table}
+        \begin{tabularx}{\linewidth}{lccccc}
+            \toprule
+            & \footnotesize{Politics} & \footnotesize{Sports} & \footnotesize{Finance} & \footnotesize{Domestic} & \footnotesize{Religion}\\
+            \cmidrule{2-6}
+            News Story1 & 1 & 0 & 0 & 1 & 1\\
+            News Story2 & 0 & 1 & 0 & 1 & 0\\
+            News Story3 & 0 & 0 & 1 & 0 & 0\\
+            \bottomrule
+        \end{tabularx}
+    \end{table}
+
+    \begin{visibleenv}<2>
+    \begin{table}
+        \begin{tabularx}{\linewidth}{lccccc}
+            \toprule
+            & \footnotesize{Owns Car} & \footnotesize{Smokes} & \footnotesize{Married} & \footnotesize{Self-Employed} & \footnotesize{Has Kids}\\
+            \cmidrule{2-6}
+            Customer1 & 1 & 0 & 1 & 0 & 1\\
+            Customer2 & 1 & 1 & 0 & 1 & 0\\
+            Customer3 & 0 & 1 & 1 & 0 & 0\\
+            \bottomrule
+        \end{tabularx}
+    \end{table}
+    \end{visibleenv}
+    
+\end{frame}
+
+\begin{frame}
+    \frametitle{Sequence Tagging}
+    \begin{columns}[t]
+        \column{.2\linewidth}
+        \includegraphics[width=\linewidth]{images/stroke1}\\
+        \begin{visibleenv}<2->
+            \tiny{Stroke cat.}
+        \end{visibleenv}
+
+        \column{.2\linewidth}
+        \includegraphics[width=\linewidth]{images/stroke2}\\
+        \begin{visibleenv}<2->
+        \tiny Stroke cat.
+        \end{visibleenv}
+
+        \column{.2\linewidth}
+        \includegraphics[width=\linewidth]{images/stroke3}\\
+        \begin{visibleenv}<2->
+        \tiny Stroke cat.
+        \end{visibleenv}
+
+        \column{.2\linewidth}
+        \includegraphics[width=\linewidth]{images/open_trash_can}\\
+        \begin{visibleenv}<2->
+            \tiny{Open trash can.}
+        \end{visibleenv}
+
+        \column{.2\linewidth}
+        \includegraphics[width=\linewidth]{images/cat_in_trashcan}\\
+        \begin{visibleenv}<2->
+            \tiny{Put cat in trash can.}
+        \end{visibleenv}
+    \end{columns}
+\vspace{5mm}
+\begin{center}
+\begin{visibleenv}<3->
+        \includegraphics[width=.8\linewidth]{images/speech}\\
+\end{visibleenv}
+\begin{visibleenv}<4->
+            Struc-tured pre-dic-tion in Py-thon
+\end{visibleenv}
+\end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Predicting Parse Trees}
+    \begin{center}
+        \includegraphics[width=.8\linewidth]{images/parse_tree}
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Semantic Images Segmentation}
+    \begin{figure}
+        \includegraphics[width=.45 \textwidth]{images/pascal}
+        \begin{visibleenv}<2->
+            \includegraphics[width=.45 \textwidth]{images/pascal_gt}
+        \end{visibleenv}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Predicting Structured Objects}
+    \[f(x, w) := \argmax_{y \in \mathcal{Y}}  g(x, y, w) \]
+    \begin{visibleenv}<2->
+    If you like:
+    \[\argmax_{y \in \mathcal{Y}}  p(y|x, w) \]
+    \end{visibleenv}
+    
+    \begin{visibleenv}<3>
+    \[f(x, w) := \argmax_{y \in \mathcal{Y}}  w^T \psi(x, y) \]
+    \end{visibleenv}
+\end{frame}
+
+\section{Inference and Factor Graphs}
+\begin{frame}
+    \frametitle{Predicting discrete vectors}
+    \[y = (y_1, y_2, \dotsc, y_{n_i})\]
+    \begin{visibleenv}<2>
+        \begin{align*}
+        f(x, w) &= \argmax_{y \in \mathcal{Y}}  w^T \psi(x, y)\\
+            &= \argmax_{y_1, y_2, \dotsc, y_{n_i}} w^T \psi(x, y)
+        \end{align*}
+    \end{visibleenv}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Factor Graphs}
+    \begin{columns}[c]
+        \column{.6\linewidth}
+        \begin{align*}
+        g(x, y) &= g_1(x, y_1, y_2, y_3) + g_2(x, y_3, y_4)\\
+                &+ g_3(x, y_4) + g_4(x, y_4, y_5, y_6)
+        \end{align*}
+        \column{.3\linewidth}
+            \includegraphics[width=\textwidth]{images/factor_graph_white_bg}
+    \end{columns}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Factor Graph for HMM}
+    \begin{center}
+        \includegraphics[width=.8\textwidth]{images/hmm_white_bg}
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Inference}
+    \begin{columns}[t]
+        \column{.5\linewidth}
+        Easy\\
+        \vspace{5mm}
+        \includegraphics[width=.8\textwidth]{images/tree_white_bg}
+        \column{.5\linewidth}
+        Tricky\\
+        \vspace{5mm}
+        \includegraphics[width=.8\textwidth]{images/grid_white_bg}
+    \end{columns}
+\end{frame}
+
+\section{Learning}
+\begin{frame}
+    \frametitle{Probabilistic Learning}
+    \[ p(y|x, w) = \frac{1}{Z} exp(w^T \psi(x, y))\]
+    \[Z = \sum_{y' \in \mathcal{Y}} exp(w^T \psi(x, y')) \]
+    \begin{visibleenv}<2->
+    Objective
+    \begin{align*}
+        \max_w \sum_i \log(p(y\hoch{i} | x\hoch{i}, w))\\
+        = \max_w \sum_i w^T \psi(x\hoch{i}, y\hoch{i}) - \log(Z)
+    \end{align*}
+    \end{visibleenv}
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Max-Margin Learning}
+    \begin{align*}
+        &\min_w \frac{1}{2} ||w||^2 + C \sum_i  \ell(x\hoch{i}, y\hoch{i}, w)\\
+        &\ell(x\hoch{i}, y\hoch{i}, w) = [\max_{y \in \mathcal{Y}} \Delta(y\hoch{i}, y) + w^T \psi(x\hoch{i}, y) - w^T \psi(x\hoch{i}, y\hoch{i})]_+.
+    \end{align*}
+\end{frame}
+
+
 \begin{frame}
     \frametitle{Structured Prediction}
     Learn prediction function of the form
@@ -115,6 +296,7 @@
     \end{visibleenv}
 
 \end{frame}
+
 
 \begin{frame}
     \frametitle{Pairwise Models}
@@ -396,7 +578,43 @@
     \end{itemize}
 \end{frame}
 
+\section{PyStruct}
+    \begin{frame}
+        \frametitle{Simple structured prediction}
+        Estimator = Learner + Model + Inference\\
 
+        \begin{itemize}
+            \item<2-> Learner: SubgradientSSVM, StructuredPerceptron, OneSlackSSVM, LatentSSVM
+            \item<2-> Model: BinaryClf, MultiLabelClf, ChainCRF, GraphCRF, EdgeFeatureGraphCRF
+            \item<2-> Inference: Linear Programming, QPBO (PyQPBO), Dual Decomposition (AD3), Message Passing (OpenGM), Everything (OpenGM)
+        \end{itemize}
+
+    \end{frame}
+
+    \begin{frame}
+        \frametitle{Example OCR}
+        \includegraphics[width=.7\linewidth]{images/code_letters}
+    \end{frame}
+
+    \begin{frame}
+        \frametitle{Example OCR}
+        \includegraphics[width=.49\linewidth]{images/plot_letters_1}
+        \includegraphics[width=.49\linewidth]{images/plot_letters_2}
+    \end{frame}
+
+    \begin{frame}
+        \frametitle{Example Snake}
+        \begin{center}
+            \includegraphics[width=.70\linewidth]{images/plot_snakes_1}
+        \end{center}
+    \end{frame}
+
+    \begin{frame}
+        \begin{center}
+            \includegraphics[width=\linewidth]{images/example_gallery}\\
+            http://pystruct.github.io
+        \end{center}
+    \end{frame}
 
 
 \section{PyStruct - Structured Prediction in Python}
@@ -431,9 +649,7 @@
     \begin{itemize}
         \item<1-> Loss-based learning yields meaningful geometric relations in RGB-D data. State-of-the-art results on NYU V2 RGB-D dataset.
         \item<2-> Show feasibility of exact learning for image segmentation, state-of-the-art results on MSRC-21, on par with comparable approaches on Pascal VOC 2010.
-        \item<3-> Demonstrate feasibility of weakly supervised object class segmentation.
-        \item<4-> General purpose clustering algorithm, theoretically sound objective, efficient, no parameters, state-of-the art performance.
-        \item<5-> Well tested, efficient software implementation for learning structured prediction. Already used by other researchers.
+        \item<3-> Well tested, efficient software implementation for learning structured prediction. Already used by other researchers.
     \end{itemize}
 \end{frame}
 
@@ -443,8 +659,6 @@
     \begin{itemize}
         \item More complex models for semantic segmentation.
         \item Integrate over time in NYU dataset.
-        \item ITM for superpixels.
-        \item Large scale weakly supervised segmentation.
     \end{itemize}
 \end{frame}
 
@@ -463,14 +677,7 @@
         \emph{Learning Depth-Sensitive Conditional Random Fields for Semantic Segmentation}\\
         Andreas C. M\"uller and Sven Behnke. International
         Conference on Robotics and Automation 2014.
-    \item
-        \emph{Multi-Instance Methods for Partially Supervised Image
-        Segmentation}\\
-        Andreas C. M\"uller and Sven Behnke. IARP Workshop on Partially Supervised Learning 2011.
-    \item
-        \emph{Information Theoretic Clustering using Minimum Spanning Trees}\\
-        Andreas C. M\"uller, Sebastian Nowozin and Christoph H. Lampert.
-        German Conference on Pattern Recognition 2012.
+
 \end{itemize}
 \end{frame}
 
@@ -569,4 +776,10 @@
 %\section*{Additional Slides MIL-MKL}
 %\begin{frame}
 
+    \begin{frame}<beamer:0>
+        \bibliographystyle{plain}
+        \bibliography{paper}
+    \end{frame}
+
+    
 \end{document}
