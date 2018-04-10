@@ -1,7 +1,17 @@
 \documentclass[final,ignorenonframetext,compress]{beamer}
-\usetheme{Warsaw}
+\usetheme{Madrid}
+\useoutertheme{default}
 \setbeamertemplate{navigation symbols}{}%remove navigation symbols
 
+
+\setbeamertemplate{section page}{%
+    \begin{centering}
+    \usebeamerfont{section title}\insertsection\par
+    \end{centering}
+}
+
+\AtBeginSection{\frame{\sectionpage}}
+%\AtBeginSubsection{\frame{\subsectionpage}}
 
 \usepackage{natbib}
 \usepackage{booktabs}
@@ -53,7 +63,7 @@
 
 
 \title[Stuctured Prediction for Semantic Segmentation] % (optional, use only with long paper titles)
-{Methods for Learning Structured Prediction in Semantic Segmentation of Natural Images}
+{Structured Prediction for Semantic Segmentation}
 
 
 \author% (optional, use only with lots of authors)
@@ -84,26 +94,6 @@
         \end{figure}
 \end{frame}
 
-\section{Learning Structured Prediction for Semantic Segmentation}
-\begin{frame}
-    \frametitle{Semantic Segmentation as Structured Prediction}
-    \begin{figure}
-        \begin{onlyenv}<1>
-            \includegraphics[width=.6\linewidth]{images/scene_sp_org}%
-        \end{onlyenv}%
-        \begin{onlyenv}<2>
-            \includegraphics[width=.6\linewidth]{images/scene_sp}%
-        \end{onlyenv}%
-        \begin{onlyenv}<3>
-            \includegraphics[width=.6\linewidth]{images/scene_sp_gt}%
-        \end{onlyenv}%
-        \begin{onlyenv}<4>
-            \includegraphics[width=.6\linewidth]{images/scene_sp_graph}%
-        \end{onlyenv}%
-    \end{figure}
-\end{frame}
-
-\section{Motivation}
 % output space combinatorial
 % output space depends on input space
 % model correlations
@@ -185,17 +175,27 @@
 \begin{frame}
     \frametitle{Predicting Parse Trees}
     \begin{center}
-        \includegraphics[width=.8\linewidth]{images/parse_tree}
+        \includegraphics[width=.8\linewidth]{images/parse_tree_white_bg}
     \end{center}
 \end{frame}
 
+
+\section{Structured Prediction for Semantic Segmentation}
 \begin{frame}
-    \frametitle{Semantic Images Segmentation}
+    \frametitle{Semantic Segmentation as Structured Prediction}
     \begin{figure}
-        \includegraphics[width=.45 \textwidth]{images/pascal}
-        \begin{visibleenv}<2->
-            \includegraphics[width=.45 \textwidth]{images/pascal_gt}
-        \end{visibleenv}
+        \begin{onlyenv}<1>
+            \includegraphics[width=.6\linewidth]{images/scene_sp_org}%
+        \end{onlyenv}%
+        \begin{onlyenv}<2>
+            \includegraphics[width=.6\linewidth]{images/scene_sp}%
+        \end{onlyenv}%
+        \begin{onlyenv}<3>
+            \includegraphics[width=.6\linewidth]{images/scene_sp_gt}%
+        \end{onlyenv}%
+        \begin{onlyenv}<4>
+            \includegraphics[width=.6\linewidth]{images/scene_sp_graph}%
+        \end{onlyenv}%
     \end{figure}
 \end{frame}
 
@@ -212,7 +212,6 @@
     \end{visibleenv}
 \end{frame}
 
-\section{Inference and Factor Graphs}
 \begin{frame}
     \frametitle{Predicting discrete vectors}
     \[y = (y_1, y_2, \dotsc, y_{n_i})\]
@@ -238,6 +237,17 @@
 \end{frame}
 
 \begin{frame}
+    \frametitle{Pairwise Models}
+    \begin{centering}
+        \begin{figure}
+            \includegraphics[width=.7\linewidth]{images/pairwise_factorgraph2}
+        \end{figure}
+    \end{centering}
+    \vspace{5mm}
+    \[w^T \psi(x, y) = \sum_{(i, j) \in E} w_{i,j} \psi_{i,j}(x, y_i, y_j) + \sum_{i\in I} w_i \psi_i(x, y_i)\]
+\end{frame}
+
+\begin{frame}
     \frametitle{Factor Graph for HMM}
     \begin{center}
         \includegraphics[width=.8\textwidth]{images/hmm_white_bg}
@@ -258,7 +268,6 @@
     \end{columns}
 \end{frame}
 
-\section{Learning}
 \begin{frame}
     \frametitle{Probabilistic Learning}
     \[ p(y|x, w) = \frac{1}{Z} exp(w^T \psi(x, y))\]
@@ -273,17 +282,9 @@
 
 \end{frame}
 
+
 \begin{frame}
     \frametitle{Max-Margin Learning}
-    \begin{align*}
-        &\min_w \frac{1}{2} ||w||^2 + C \sum_i  \ell(x\hoch{i}, y\hoch{i}, w)\\
-        &\ell(x\hoch{i}, y\hoch{i}, w) = [\max_{y \in \mathcal{Y}} \Delta(y\hoch{i}, y) + w^T \psi(x\hoch{i}, y) - w^T \psi(x\hoch{i}, y\hoch{i})]_+.
-    \end{align*}
-\end{frame}
-
-
-\begin{frame}
-    \frametitle{Structured Prediction}
     Learn prediction function of the form
     \[g(x, w) := \argmax_{y \in \mathcal{Y}}  w^T \psi(x, y) \]
     \begin{visibleenv}<2->
@@ -298,16 +299,6 @@
 \end{frame}
 
 
-\begin{frame}
-    \frametitle{Pairwise Models}
-    \begin{centering}
-        \begin{figure}
-            \includegraphics[width=.7\linewidth]{images/pairwise_factorgraph2}
-        \end{figure}
-    \end{centering}
-    \vspace{5mm}
-    \[w^T \psi(x, y) = \sum_{(i, j) \in E} w_{i,j} \psi_{i,j}(x, y_i, y_j) + \sum_{i\in I} w_i \psi_i(x, y_i)\]
-\end{frame}
 
 \section{Learning Depth-Sensitive Conditional Random Fields}
 
@@ -615,32 +606,6 @@
             http://pystruct.github.io
         \end{center}
     \end{frame}
-
-
-\section{PyStruct - Structured Prediction in Python}
-\begin{frame}
-    \frametitle{PyStruct - Simple Structured Prediction}
-    \begin{columns}
-        \column{.6\textwidth}
-            \begin{itemize}
-                \item Implements common and state-of-the-art structural solvers (optimizing for w).
-                \item<2-> Implements powerful models for many use cases.
-                \item<3-> Interface to popular inference libraries: LibDAI, OpenGM, QPBO, AD3.
-                \item<4-> Well docmented, includes common benchmarks.
-            \end{itemize}
-        \column{.4\textwidth}
-        \begin{center}
-            \includegraphics[width=.6\linewidth]{images/logo_pystruct}
-        \end{center}
-    \end{columns}
-\end{frame}
-
-\begin{frame}
-    \begin{center}
-        \includegraphics[width=\linewidth]{images/example_gallery}\\
-        http://pystruct.github.io
-    \end{center}
-\end{frame}
 
 
 \section*{Summary of Contributions}
