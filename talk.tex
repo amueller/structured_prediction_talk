@@ -13,7 +13,7 @@
 \AtBeginSection{\frame{\sectionpage}}
 %\AtBeginSubsection{\frame{\subsectionpage}}
 
-\usepackage{natbib}
+\usepackage{biblatex}
 \usepackage{booktabs}
 \usepackage{tabularx}
 
@@ -73,6 +73,7 @@
 {%
     Columbia University
 }
+
 
 \begin{document}
 
@@ -293,7 +294,7 @@
             &\min_w \frac{1}{2} ||w||^2 + C \sum_i  \ell(x\hoch{i}, y\hoch{i}, w)\\
             &\ell(x\hoch{i}, y\hoch{i}, w) = [\max_{y \in \mathcal{Y}} \Delta(y\hoch{i}, y) + w^T \psi(x\hoch{i}, y) - w^T \psi(x\hoch{i}, y\hoch{i})]_+.
         \end{align*}
-    \citet{joachims2009cutting}
+    \textcite{joachims2009cutting}
     \end{visibleenv}
 
 \end{frame}
@@ -371,7 +372,7 @@
     \begin{itemize}
         \item $1$-slack SSVM
         \item Inference using fusion moves and AD$^3$.
-        \item Exact learning in loopy model~\citep{mueller2014_exact}.
+        \item Exact learning in loopy model~\parencite{mueller2014_exact}.
     \end{itemize}
 \end{frame}
 
@@ -420,10 +421,10 @@
     \footnotesize RF + SP + SVM                   &         94.4  &   79.1        & 64.2          & \textbf{44.0} &  70.4        &  70.3 \\
     \footnotesize RF + SP + CRF                   & \textbf{94.9} &   78.9        &          71.1 & 42.7          &\textbf{71.9} &  \textbf{72.3} \\
     \cmidrule(r){1-7}
-    \footnotesize \citet{SilbermanECCV12}         &         68    &   59          & 70           & 42            &  59.6        & 58.6 \\
-    \footnotesize \citet{couprie-iclr-13}         &         87.3  & \textbf{86.1} & 45.3         & 35.5          &  63.5        & 64.5 \\
+    \footnotesize \textcite{SilbermanECCV12}         &         68    &   59          & 70           & 42            &  59.6        & 58.6 \\
+    \footnotesize \textcite{couprie-iclr-13}         &         87.3  & \textbf{86.1} & 45.3         & 35.5          &  63.5        & 64.5 \\
     \cmidrule(r){1-7}
-    \footnotesize \citet{stueckler2013}$^\dagger$ & \textbf{95.6} &   83.0        & \textbf{75.1}& 14.2          &  67.0        & 70.9 \\
+    \footnotesize \textcite{stueckler2013}$^\dagger$ & \textbf{95.6} &   83.0        & \textbf{75.1}& 14.2          &  67.0        & 70.9 \\
 
     \bottomrule
     \end{tabularx}
@@ -533,9 +534,9 @@
                     Pairwise model (move making)& 30.2\\
                     Pairwise model (exact) & 30.4\\
                     \cmidrule{1-2}
-                    \citet{dann2012pottics} & 27.4\\
-                    \citet{krahenbuhl2012efficient} & 30.2\\
-                    \citet{krahenbuhlparameter} & 30.8\\
+                    \textcite{dann2012pottics} & 27.4\\
+                    \textcite{krahenbuhl2012efficient} & 30.2\\
+                    \textcite{krahenbuhlparameter} & 30.8\\
                     \bottomrule
                 \end{tabular}
         \end{table}
@@ -549,9 +550,9 @@
                     Pairwise model (move making)& 79.6&84.6\\
                     Pairwise model (exact)& 79.0 & 84.3\\
                     \cmidrule{1-3}
-                    \citet{ladicky2009associative} & 75.8& 85.0\\
-                    \citet{gonfaus2010harmony} & 77&  75\\
-                    \citet{lucchi2013learning} & 78.9& 83.7\\
+                    \textcite{ladicky2009associative} & 75.8& 85.0\\
+                    \textcite{gonfaus2010harmony} & 77&  75\\
+                    \textcite{lucchi2013learning} & 78.9& 83.7\\
                     \bottomrule
                 \end{tabular}
 
@@ -741,10 +742,10 @@
 %\section*{Additional Slides MIL-MKL}
 %\begin{frame}
 
-    \begin{frame}<beamer:0>
-        \bibliographystyle{plain}
-        \bibliography{paper}
-    \end{frame}
+%\begin{frame}<beamer:0>
+\begin{frame}
+\printbibliography{paper}
+\end{frame}
 
     
 \end{document}
