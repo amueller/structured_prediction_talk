@@ -13,7 +13,8 @@
 \AtBeginSection{\frame{\sectionpage}}
 %\AtBeginSubsection{\frame{\subsectionpage}}
 
-\usepackage{biblatex}
+\usepackage[backend=biber,citestyle=authoryear]{biblatex}
+\addbibresource{paper.bib}
 \usepackage{booktabs}
 \usepackage{tabularx}
 
@@ -294,7 +295,7 @@
             &\min_w \frac{1}{2} ||w||^2 + C \sum_i  \ell(x\hoch{i}, y\hoch{i}, w)\\
             &\ell(x\hoch{i}, y\hoch{i}, w) = [\max_{y \in \mathcal{Y}} \Delta(y\hoch{i}, y) + w^T \psi(x\hoch{i}, y) - w^T \psi(x\hoch{i}, y\hoch{i})]_+.
         \end{align*}
-    \textcite{joachims2009cutting}
+    \cite{joachims2009cutting}
     \end{visibleenv}
 
 \end{frame}
@@ -619,35 +620,7 @@
     \end{itemize}
 \end{frame}
 
-\section*{Future Directions}
-\begin{frame}
-    \frametitle{Future Directions}
-    \begin{itemize}
-        \item More complex models for semantic segmentation.
-        \item Integrate over time in NYU dataset.
-    \end{itemize}
-\end{frame}
-
-\begin{frame}{Overview}
-    \tiny
-\begin{itemize}
-    \item
-        \emph{PyStruct - Structured Prediction in Python}\\
-        Andreas C. M\"uller and Sven Behnke. Journal of Machine Learning
-        Research 2014.
-    \item
-        \emph{Learning a Loopy Model for Semantic Segmentation Exactly}\\
-        Andreas C. M\"uller and Sven Behnke. International
-        Conference on Computer Vision Theory and Applications 2014.
-    \item
-        \emph{Learning Depth-Sensitive Conditional Random Fields for Semantic Segmentation}\\
-        Andreas C. M\"uller and Sven Behnke. International
-        Conference on Robotics and Automation 2014.
-
-\end{itemize}
-\end{frame}
-
-%\section*{Additional Slides NYU}
+\section*{Thank you}
 \section*{Additional Slides Exact Learning}
 \begin{frame}{$n$-slack Cutting Plane Algorithm}
     \addtocounter{framenumber}{-1}
@@ -744,7 +717,7 @@
 
 %\begin{frame}<beamer:0>
 \begin{frame}
-\printbibliography{paper}
+\printbibliography
 \end{frame}
 
     
